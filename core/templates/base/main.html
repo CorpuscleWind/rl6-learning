@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link type="text/css" href="{% static 'css/bootstrap.css' %}" rel="stylesheet"/>
+    <link type="text/css" href="{% static 'css/bootstrap-theme.css' %}" rel="stylesheet"/>
+    <link type="text/css" href="{% static 'css/bootstrap-select.min.css' %}" rel="stylesheet"/>
+    <link type="text/css" href="{% static 'css/bootstrap-card.css' %}" rel="stylesheet"/>
+    <link type="text/css" href="{% static 'css/main.css' %}" rel="stylesheet"/>
+
+</head>
+<body>
+<div class="wrapper">
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">
+                    РЛ6 Технологии приборостроения
+                </a>
+            </div>
+            <div class="navbar-right">
+                {% if user.is_authenticated %}
+                <span>{{ user.get_full_name }}</span>
+                <a href="{% url 'core:logout' %}">
+                    <button class="btn btn-login btn-navbar">
+                        Выйти
+                    </button>
+                </a>
+                {% else %}
+                <button class="btn btn-login btn-navbar" data-toggle="modal" data-target="#auth-modal">
+                    Войти
+                </button>
+                <button class="btn btn-register btn-navbar" data-toggle="modal" data-target="#registration-modal">
+                    Зарегистрироваться
+                </button>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+</div>
+
+{% block content %}
+{% endblock %}
+
+
+<div class="navbar navbar-inverse footer">
+    <div class="container">
+        <div class="navbar-text pull=left">
+            <p> © company 2016.</p>
+        </div>
+    </div>
+</div>
+
+{% include 'auth/auth.html' %}
+{% include 'auth/registration.html' %}
+
+<script type="text/javascript" src="{% static 'js/jquery-3.1.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/parallax.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/bootstrap-select.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+
+<script>
+    $(".parallax-window").parallax({imageSrc: "{% static 'img/paralax.jpg' %}"});
+</script>
+
+</body>
+</html>

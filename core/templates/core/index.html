@@ -1,0 +1,47 @@
+{% extends 'base/main.html' %}
+
+{% block content %}
+    <div class="section section-header parallax-window">
+        <div class="pattern-image">
+
+        </div>
+    </div>
+    <div class="container promo">
+        <h1>Кафедра РЛ6</h1>
+        <h2>Технологии приборостоения</h2>
+    </div>
+
+    <div class="container">
+        <h1>Дисциплины</h1>
+
+        <div class="row">
+            <div class="container">
+                <div class="row ">
+                    <div class="col-lg-12">
+                        {% for discipline in discipline_list %}
+                            {% if user.is_authenticated %}
+                            <a href="{% url 'learning:discipline' discipline_id=discipline.id %}">
+                            {% else %}
+                            <a href="#" data-toggle="modal" data-target="#auth-modal">
+                            {% endif %}
+                                <div class="col-md-4">
+                                    <div class="profile-card text-center">
+                                        <div class="card-img">
+                                            <img src="{{ discipline.image.url }}">
+                                        </div>
+                                        <div class="profile-info">
+                                            <h2 class="hvr-underline-from-center">
+                                                {{ discipline.name }}<span></span>
+                                            </h2>
+                                            <div>{{ discipline.short_description }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

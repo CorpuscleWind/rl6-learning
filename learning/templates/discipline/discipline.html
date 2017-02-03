@@ -1,0 +1,39 @@
+{% extends 'base/main.html' %}
+
+{% block content %}
+
+    <div class="container">
+        <h1>{{ discipline.name }}</h1>
+
+        <h2>Тесты</h2>
+
+        <div class="row">
+            <div class="container">
+                <div class="row ">
+                    <div class="col-lg-12">
+                        {% for test in test_list %}
+                            <a href="{% url 'learning:test' test_id=test.id %}">
+                                <div class="col-md-4">
+                                    <div class="profile-card text-center">
+                                        <div class="card-img">
+                                            <img src="{{ test.image.url }}">
+                                        </div>
+                                        <div class="profile-info">
+                                            <h2 class="hvr-underline-from-center">
+                                                {{ test.name }}<span></span>
+                                            </h2>
+                                            <div>{{ test.short_description }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2>Обратная связь</h2>
+        {% include 'feedback.html' %}
+    </div>
+{% endblock %}

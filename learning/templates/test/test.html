@@ -1,0 +1,45 @@
+{% extends 'base/main.html' %}
+
+{% block content %}
+
+    <div class="container">
+        <h1>{{ test.name }}</h1>
+        <div class="container">
+            {% if not user_result.complete %}
+            <h4>Внимательно прочтите все задания и введите/выберите ответы. Проверьте себя перед отправкой.</h4>
+            <form id="test-form" action="{% url 'learning:test' test_id=test.id %}" method="post" role="form">
+            {% for question in question_list %}
+                <div class="jumbotron">
+                    <p>{{ question.number }}. {{ question.text }}</p>
+                    {% if question.type == open_question %}
+                    <div class="form-group">
+                        <input type="text" name="{{ question.id }}"class="form-control" placeholder="Введите ответ" value="">
+                    </div>
+                    {% elif question.type == choice_question %}
+                        {% for answer in question.answer_set.all %}
+                            <div class="radio">
+                                <label><input type="radio" name="{{ question.id }}" value="{{ answer.text }}">{{ answer.text }}</label>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Отправить">
+                    </div>
+                </div>
+            </div>
+            </form>
+            {% else %}
+                <h4>Вы успешно завершили тестирование.</h4>
+                <div class="jumbotron">
+                    <p>Дата начала теста: <b>{{ user_result.start_time }}</b></p>
+                    <p>Дата завершения теста: <b>{{ user_result.end_time }}</b></p>
+                    <p>Ваш результат: <b>{{ user_result.score }} из {{ user_result.question_count }}</b></p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
