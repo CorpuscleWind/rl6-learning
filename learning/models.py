@@ -86,6 +86,7 @@ class Answer(models.Model):
     text = models.TextField(u'Текст ответа')
     is_correct = models.BooleanField(u'Верный?', default=False)
     question = models.ForeignKey(Question, verbose_name=u'Вопрос')
+    image = models.ImageField(upload_to='question', null=True, blank=True)
 
     class Meta:
         verbose_name = u'Вариант ответа'
