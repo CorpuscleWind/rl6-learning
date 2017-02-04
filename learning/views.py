@@ -22,19 +22,22 @@ class TestView(LoginRequiredMixin, TemplateView, AjaxFormView):
     form_class = UserResultForm
 
     def dispatch(self, request, *args, **kwargs):
-        self.test_id = kwargs.get('test_id')
+        test_id = kwargs.get('test_id')
+        self.test = Test.objects.filter(id=test_id).first()
+        if not self.test or not self.test.is_active:
+            raise Http404
         return super(TestView, self).dispatch(request, *args, **kwargs)
 
     def get_form(self, **kwargs):
-        test_id = self.test_id
+        test_id = self.test.id
         user_result = UserResult.objects.get_or_create_user_result(test_id, self.request.user)
         return self.form_class(data=self.request.POST, instance=user_result)
 
     def get_context_data(self, **kwargs):
         context = super(TestView, self).get_context_data(**kwargs)
-        test_id = self.test_id
+        test_id = self.test.id
 
-        context['test'] = Test.objects.filter(id=test_id).first()
+        context['test'] = self.test
         if not context['test']:
             raise Http404
         context['question_list'] = Question.objects.filter(test_id=test_id)

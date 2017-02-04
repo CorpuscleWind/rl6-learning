@@ -9,7 +9,7 @@ class DisciplineAdmin(admin.ModelAdmin):
 
 class TestAdmin(admin.ModelAdmin):
 
-    list_display = ('name', 'short_description', 'discipline')
+    list_display = ('name', 'short_description', 'discipline', 'is_active')
     list_filter = ('discipline', )
 
 
@@ -28,10 +28,12 @@ class QuestionAdmin(admin.ModelAdmin):
 
 class UserResultAdmin(admin.ModelAdmin):
     list_display = ('test', 'user', 'score', 'question_count', 'complete')
+    list_filter = ('test', 'user__department', 'complete')
 
 
 class QuestionResultAdmin(admin.ModelAdmin):
     list_display = ('question', 'is_correct')
+    list_filter = ('result__test', )
 
 
 admin.site.register(Discipline, DisciplineAdmin)

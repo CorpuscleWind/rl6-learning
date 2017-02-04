@@ -29,7 +29,8 @@ class Test(models.Model):
     name = models.CharField(u'Название теста', max_length=255)
     short_description = models.TextField(u'Короткое описание')
     image = models.ImageField(upload_to='test')
-    discipline = models.ForeignKey('Discipline')
+    discipline = models.ForeignKey('Discipline', verbose_name=u'Дисциплина')
+    is_active = models.BooleanField(u'Активен сейчас?', default=False)
 
     class Meta:
         verbose_name = u'Тест'

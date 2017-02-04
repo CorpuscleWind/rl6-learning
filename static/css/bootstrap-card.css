@@ -86,7 +86,7 @@
     transition-timing-function: ease-out;
 }
 
-.profile-card:hover .hvr-underline-from-center:before, .profile-card:focus .hvr-underline-from-center:before, .profile-card:active .hvr-underline-from-center:before {
+.profile-card-hover:hover .hvr-underline-from-center:before, .profile-card-hover:focus .hvr-underline-from-center:before, .profile-card-hover:active .hvr-underline-from-center:before {
     left: 0;
     right: 0;
     height: 1px;

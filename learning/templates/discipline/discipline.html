@@ -12,21 +12,25 @@
                 <div class="row ">
                     <div class="col-lg-12">
                         {% for test in test_list %}
+                            {% if test.is_active %}
                             <a href="{% url 'learning:test' test_id=test.id %}">
+                            {% endif %}
                                 <div class="col-md-4">
-                                    <div class="profile-card text-center">
+                                    <div class="profile-card {% if test.is_active %} profile-card-hover {% endif %} text-center">
                                         <div class="card-img">
                                             <img src="{{ test.image.url }}">
                                         </div>
                                         <div class="profile-info">
                                             <h2 class="hvr-underline-from-center">
-                                                {{ test.name }}<span></span>
+                                                {{ test.name }}<span>{% if not test.is_active %}Тест пока недоступен{% endif %}</span>
                                             </h2>
                                             <div>{{ test.short_description }}</div>
                                         </div>
                                     </div>
                                 </div>
+                            {% if test.is_active %}
                             </a>
+                            {% endif %}
                         {% endfor %}
                     </div>
                 </div>
