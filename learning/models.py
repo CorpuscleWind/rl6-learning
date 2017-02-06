@@ -77,6 +77,10 @@ class Question(models.Model):
             'choice_question': Question.CHOICE
         }
 
+    def has_image(self):
+        print self.image
+        return False
+
     def __unicode__(self):
         return get_part_string(self.text)
 

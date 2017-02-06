@@ -12,18 +12,18 @@
                 <div class="jumbotron">
                     <p>{{ question.number }}. {{ question.text }}</p>
                     {% if question.image %}
-                        <img class="question-img" src="{{ question.image.url }}">
+                        <img class="question-image" src="{{ question.image.url }}">
                     {% endif %}
                     {% if question.type == open_question %}
                     <div class="form-group">
-                        <input type="text" name="{{ question.id }}"class="form-control" placeholder="Введите ответ" value="">
+                        <input type="text" name="{{ question.id }}" class="form-control" placeholder="Введите ответ" value="">
                     </div>
                     {% elif question.type == choice_question %}
                         {% for answer in question.answer_set.all %}
                             <div class="radio">
                                 <label><input type="radio" name="{{ question.id }}" value="{{ answer.text }}">{{ answer.text }}</label>
                                 {% if answer.image %}
-                                <img class="question-img" src="{{ answer.image.url }}">
+                                <img class="answer-image" src="{{ answer.image.url }}">
                                 {% endif %}
                             </div>
                         {% endfor %}

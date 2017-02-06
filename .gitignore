@@ -3,3 +3,4 @@ env
 *.pyc
 media/*
 conf/local.conf
+.DS_Store

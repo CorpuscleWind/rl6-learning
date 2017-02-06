@@ -161,3 +161,11 @@
 	color: red;
 	padding: 4px;
 }
+.question-image {
+	max-width: 700px;
+	max-height: 300px;
+}
+.answer-image {
+	max-width: 500px;
+	max-height: 150px;
+}
