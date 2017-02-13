@@ -2,7 +2,7 @@ from core.base import AjaxFormView, LoginRequiredMixin
 from django.http import Http404
 from django.views.generic import TemplateView
 from learning.forms import UserResultForm
-from learning.models import Test, Discipline, Question, UserResult
+from learning.models import Test, Discipline, Question, UserResult, Material
 
 
 class DisciplineView(LoginRequiredMixin, TemplateView):
@@ -10,10 +10,12 @@ class DisciplineView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(DisciplineView, self).get_context_data(**kwargs)
-        context['discipline'] = Discipline.objects.filter(id=kwargs.get('discipline_id')).first()
+        discipline_id = kwargs.get('discipline_id')
+        context['discipline'] = Discipline.objects.filter(id=discipline_id).first()
         if not context['discipline']:
             raise Http404
-        context['test_list'] = Test.objects.filter(discipline_id=kwargs.get('discipline_id'))
+        context['test_list'] = Test.objects.filter(discipline_id=discipline_id)
+        context['material_list'] = Material.objects.filter(discipline=discipline_id)
         return context
 
 

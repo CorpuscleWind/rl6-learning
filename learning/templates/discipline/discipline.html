@@ -37,6 +37,19 @@
             </div>
         </div>
 
+        {% if material_list %}
+        <h2>Полезные материалы</h2>
+            <div class="container">
+                {% for material in material_list %}
+                    <p>
+                        <a href="{{ material.file.url }}">{{ material.name }}</a>
+                        {% if material.description %} - {{ material.description }}{% endif %}
+                    </p>
+
+                {% endfor %}
+            </div>
+        {% endif %}
+
         <h2>Обратная связь</h2>
         {% include 'feedback.html' %}
     </div>

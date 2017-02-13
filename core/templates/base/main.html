@@ -55,6 +55,7 @@
     </div>
 </div>
 
+<input type="hidden" value="{{ csrf_token }}" name="csrfmiddlewaretoken">
 {% include 'auth/auth.html' %}
 {% include 'auth/registration.html' %}
 

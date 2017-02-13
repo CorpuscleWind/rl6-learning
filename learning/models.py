@@ -161,3 +161,18 @@ class QuestionResult(models.Model):
 
     def __unicode__(self):
         return unicode(self.result.user.get_short_name())
+
+
+class Material(models.Model):
+
+    file = models.FileField(upload_to='material')
+    name = models.CharField(u'Имя файла', max_length=256)
+    description = models.TextField(u'Описание', null=True, blank=True)
+    discipline = models.ForeignKey(Discipline, verbose_name=u'Дисциплина')
+
+    class Meta:
+        verbose_name = u'Полезный материал'
+        verbose_name_plural = u'Полезные материалы'
+
+    def __unicode__(self):
+        return unicode(self.name)
