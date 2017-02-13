@@ -4,3 +4,4 @@ env
 media/*
 conf/local.conf
 .DS_Store
+collected_static
