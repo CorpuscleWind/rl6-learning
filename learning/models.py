@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 import random
 
 from application.utils import get_part_string
+from core.base import update_filename
 from core.models import User
 from django.db import models
 from django.db.models import Prefetch
@@ -14,7 +15,7 @@ class Discipline(models.Model):
 
     name = models.CharField(u'Название дисциплины', max_length=255)
     short_description = models.TextField(u'Короткое описание')
-    image = models.ImageField(upload_to='discipline')
+    image = models.ImageField(upload_to=update_filename('discipline'))
 
     class Meta:
         verbose_name = u'Дисциплина'
@@ -28,7 +29,7 @@ class Test(models.Model):
 
     name = models.CharField(u'Название теста', max_length=255)
     short_description = models.TextField(u'Короткое описание')
-    image = models.ImageField(upload_to='test')
+    image = models.ImageField(upload_to=update_filename('test'))
     discipline = models.ForeignKey('Discipline', verbose_name=u'Дисциплина')
     is_active = models.BooleanField(u'Активен сейчас?', default=False)
 
@@ -59,7 +60,7 @@ class Question(models.Model):
 
     text = models.TextField(u'Текст вопросса')
     number = models.PositiveIntegerField(u'Номер вопроса')
-    image = models.ImageField(upload_to='question', null=True, blank=True)
+    image = models.ImageField(upload_to=update_filename('question'), null=True, blank=True)
     test = models.ForeignKey('Test')
     type = models.PositiveIntegerField(choices=TYPES, default=TEXT)
     right_answer = models.TextField(u'Текст верного ответа', null=True, blank=True)
@@ -90,7 +91,7 @@ class Answer(models.Model):
     text = models.TextField(u'Текст ответа')
     is_correct = models.BooleanField(u'Верный?', default=False)
     question = models.ForeignKey(Question, verbose_name=u'Вопрос')
-    image = models.ImageField(upload_to='answer', null=True, blank=True)
+    image = models.ImageField(upload_to=update_filename('answer'), null=True, blank=True)
 
     class Meta:
         verbose_name = u'Вариант ответа'
@@ -165,7 +166,7 @@ class QuestionResult(models.Model):
 
 class Material(models.Model):
 
-    file = models.FileField(upload_to='material')
+    file = models.FileField(upload_to=update_filename('material'))
     name = models.CharField(u'Имя файла', max_length=256)
     description = models.TextField(u'Описание', null=True, blank=True)
     discipline = models.ForeignKey(Discipline, verbose_name=u'Дисциплина')
