@@ -15,7 +15,7 @@ config_path = production_config if os.path.exists(production_config) else develo
 config.read(config_path)
 
 SECRET_KEY = 'tuu)0lx#ticu6f%^o91+%==xgw@vpc5x9zyq58^8wttj&^91n+'
-DEBUG = config.get('common', 'debug')
+DEBUG = config.getboolean('common', 'debug')
 
 ALLOWED_HOSTS = ['*']
 
