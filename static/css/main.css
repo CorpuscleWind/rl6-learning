@@ -164,8 +164,12 @@
 .question-image {
 	max-width: 700px;
 	max-height: 300px;
+	padding-bottom: 16px;
 }
 .answer-image {
 	max-width: 500px;
 	max-height: 150px;
+}
+.jumbotron label {
+	font-size: 20px;
 }
