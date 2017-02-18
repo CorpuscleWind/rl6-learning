@@ -2,6 +2,7 @@ import os
 
 from django.http import JsonResponse
 from django.shortcuts import redirect
+from django.utils.crypto import hashlib
 from django.views.generic import FormView
 from django.utils.deconstruct import deconstructible
 
@@ -39,7 +40,7 @@ class PathAndRename(object):
     def __call__(self, instance, filename):
         ext = filename.split('.')[-1]
 
-        filename = '{}.{}'.format(filename.encode('utf-8').hexdigest(), ext)
+        filename = '{}.{}'.format(hashlib.md5(filename.encode('utf-8')).hexdigest(), ext)
         return os.path.join(self.path, filename)
 
 discipline_upload = PathAndRename('discipline')
