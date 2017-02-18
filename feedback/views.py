@@ -1,5 +1,6 @@
 from core.base import AjaxFormView, LoginRequiredMixin
 from feedback.forms import FeedbackForm
+from feedback.models import Feedback
 
 
 class FeedbackView(LoginRequiredMixin, AjaxFormView):

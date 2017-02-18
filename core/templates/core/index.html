@@ -1,4 +1,5 @@
 {% extends 'base/main.html' %}
+{% load static %}
 
 {% block content %}
     <div class="section section-header parallax-window">
@@ -28,6 +29,7 @@
                                         <div class="card-img">
                                             <img src="{{ discipline.image.url }}">
                                         </div>
+
                                         <div class="profile-info">
                                             <h2 class="hvr-underline-from-center">
                                                 {{ discipline.name }}<span></span>
@@ -43,4 +45,5 @@
             </div>
         </div>
     </div>
+
 {% endblock %}

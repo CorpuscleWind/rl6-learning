@@ -30,13 +30,14 @@ class UserResultForm(forms.ModelForm):
         for question in question_list:
             try:
                 answer = self.data.get(unicode(question.id))
+                answer = answer.lower().strip()
             except Exception:
                 raise ValidationError(u'Пожалуйста, введите все ответы')
             if not answer:
                 raise ValidationError(u'Пожалуйста, введите все ответы')
 
             if question.type == Question.TEXT:
-                is_correct = answer == question.right_answer
+                is_correct = (answer == question.right_answer)
             else:
                 is_correct = Answer.objects.filter(question=question, is_correct=True, text=answer).exists()
 

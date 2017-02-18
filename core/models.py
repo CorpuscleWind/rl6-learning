@@ -41,7 +41,7 @@ class User(AbstractBaseUser, PermissionsMixin):
                                     help_text=_('Designates whether this user should be treated as '
                                                 'active. Unselect this instead of deleting accounts.'))
 
-    department = models.ForeignKey('Department', verbose_name=u'Кафедра и группа', null=True, blank=True)
+    department = models.ForeignKey('Department', verbose_name=u'Учебная группа', null=True, blank=True)
 
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
 
@@ -66,12 +66,12 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
 class Department(models.Model):
-    name = models.CharField(u'Кафедра, группа, год', max_length=255)
-    is_active = models.BooleanField('Активна?', default=True)
+    name = models.CharField(u'Обозначение учебной группы', max_length=255)
+    is_active = models.BooleanField(u'Активна?', default=True)
 
     class Meta:
-        verbose_name = u'Кафедра'
-        verbose_name_plural = u'Кафедры'
+        verbose_name = u'Учебная группа'
+        verbose_name_plural = u'Учебные группы'
 
     def __unicode__(self):
         return unicode(self.name)

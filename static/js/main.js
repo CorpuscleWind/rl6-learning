@@ -28,7 +28,7 @@ function processResponse(response, form) {
     if(response.status == "OK") {
         location.reload();
     } else {
-        $('html, body').animate({ scrollTop: 0 }, 'slow');
+        $('html, body').animate({ scrollTop: $(form).offset().top }, 'slow');
         var errors = response.message;
         for(var field in errors) {
             if (errors.hasOwnProperty(field)) {

@@ -1,11 +1,9 @@
-import hashlib
-from functools import partial
-
 import os
 
 from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.views.generic import FormView
+from django.utils.deconstruct import deconstructible
 
 
 class LoginRequiredMixin(object):
@@ -32,9 +30,21 @@ class AjaxFormView(FormView):
         return self.error(form, message)
 
 
-def update_filename(path):
-    def upload(up_path, instance, filename):
-        ext = filename.split('.')[-1] if len(filename.split('.')) > 2 else ''
-        name = hashlib.md5(filename.encode('utf-8')).hexdigest() + '.' + ext
-        return os.path.join(up_path, name)
-    return partial(upload, path)
+@deconstructible
+class PathAndRename(object):
+
+    def __init__(self, sub_path):
+        self.path = sub_path
+
+    def __call__(self, instance, filename):
+        ext = filename.split('.')[-1]
+
+        filename = '{}.{}'.format(filename.encode('utf-8').hexdigest(), ext)
+        return os.path.join(self.path, filename)
+
+discipline_upload = PathAndRename('discipline')
+test_upload = PathAndRename('test')
+question_upload = PathAndRename('question')
+answer_upload = PathAndRename('answer')
+material_upload = PathAndRename('material')
+
