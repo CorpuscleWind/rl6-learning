@@ -8,7 +8,7 @@ class FeedbackForm(forms.ModelForm):
 
     class Meta:
         model = Feedback
-        fields = ['question_1', 'question_2', 'question_3', 'discipline']
+        fields = ['question_1', 'question_2', 'question_3', 'question_4', 'discipline']
 
     def __init__(self, user, **kwargs):
         self.user = user

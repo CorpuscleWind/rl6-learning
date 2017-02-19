@@ -2,18 +2,23 @@
 <form id="feedback-form" action="{% url 'feedback:feedback' %}" method="post" role="form">
     <div class="jumbotron">
         <div class="form-group">
-          <label for="comment">Предложения по содержанию курса:</label>
+          <label for="comment">Предложения по содержанию курса. Расскажите, пожалуйста, какие темы показались интересными и полезными, а какие Вы хотели бы заменить на другие (укажите какие).</label>
           <textarea name="question_1" class="form-control" rows="5" id="comment"></textarea>
         </div>
 
         <div class="form-group">
-          <label for="comment">Вопрос 2:</label>
+          <label for="comment">Предложения по организации курса. Расскажите, пожалуйста, что в организации лекций, семинаров, рубежных контролей Вы хотели бы изменить, а что показалось эффективным.</label>
           <textarea name="question_2" class="form-control" rows="5" id="comment"></textarea>
         </div>
 
         <div class="form-group">
-          <label for="comment">Вопрос 3:</label>
+          <label for="comment">Личные интересы. Какой темой Вы хотели бы заниматься в рамках выпускной квалификационной работы? Расскажите, пожалуйста, об имеющемся научном заделе.</label>
           <textarea name="question_3" class="form-control" rows="5" id="comment"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="comment">Планы на будущее. Планируете ли Вы после окончания ВУЗа работать по специальности? Хотели бы Вы продолжить обучение в магистратуре / аспирантуре?</label>
+          <textarea name="question_4" class="form-control" rows="5" id="comment"></textarea>
         </div>
 
         <input type="hidden" name="discipline" value="{{ discipline.id }}">

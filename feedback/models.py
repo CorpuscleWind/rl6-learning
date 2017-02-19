@@ -11,8 +11,10 @@ class Feedback(models.Model):
     user = models.ForeignKey(User, verbose_name=u'Пользователь')
     discipline = models.ForeignKey(Discipline, verbose_name=u'Дисциплина')
     question_1 = models.TextField(u'Предложения по содержанию курса:', null=True, blank=True)
-    question_2 = models.TextField(u'Второй вопрос?', null=True, blank=True)
-    question_3 = models.TextField(u'Третий вопрос???', null=True, blank=True)
+    question_2 = models.TextField(u'Предложения по организации курса', null=True, blank=True)
+    question_3 = models.TextField(u'Личные интересы', null=True, blank=True)
+    question_4 = models.TextField(u'Планы на будущее', null=True, blank=True)
+
 
     class Meta:
         verbose_name = u'Обратная связь'
