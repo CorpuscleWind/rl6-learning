@@ -21,7 +21,7 @@
                     {% elif question.type == choice_question %}
                         {% for answer in question.answer_set.all %}
                             <div class="radio">
-                                <label><input type="radio" name="{{ question.id }}" value="{{ answer.text }}">{{ answer.text }}</label>
+                                <label><input type="radio" name="{{ question.id }}" value="{{ answer.text }}"><p>{{ answer.text }}</p></label>
                                 {% if answer.image %}
                                 <img class="answer-image" src="{{ answer.image.url }}">
                                 {% endif %}
