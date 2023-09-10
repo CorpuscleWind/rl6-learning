@@ -1,6 +1,7 @@
 # coding=utf-8
 from core.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, ReadOnlyPasswordHashField
+from django.contrib.auth import authenticate
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
@@ -15,6 +16,24 @@ class UserLoginForm(AuthenticationForm):
         super(UserLoginForm, self).__init__(*args, **kwargs)
         self.fields['username'].widget.attrs['placeholder'] = u'E-mail'
         self.fields['password'].widget.attrs['placeholder'] = u'Введите пароль'
+
+    def clean(self):
+        username = self.cleaned_data.get('username')
+        password = self.cleaned_data.get('password')
+
+        if username and password:
+            self.user_cache = authenticate(username=username, password=password)
+            if self.user_cache is None:
+                print("Wrong password?")
+                raise forms.ValidationError(
+                    self.error_messages['invalid_login'],
+                    code='invalid_login',
+                    params={'username': self.username_field.verbose_name},
+                )
+            else:
+                self.confirm_login_allowed(self.user_cache)
+
+        return self.cleaned_data
 
 
 class UserRegistrationForm(UserCreationForm):
