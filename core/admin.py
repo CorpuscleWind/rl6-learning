@@ -1,6 +1,7 @@
-from core.models import User, Department, Group
+from core.models import User, Department
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.models import Group
 
 
 class CustomUserAdmin(UserAdmin):
