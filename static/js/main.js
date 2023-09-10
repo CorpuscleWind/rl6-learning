@@ -75,7 +75,7 @@ $('form#registration-form').on('submit', function(event) {
         $('div#form-registration').hide();
         $('div#success-registration').show();
     };
-    ajaxOnFormSubmit(this);
+    ajaxOnFormSubmit(this, successFunc);
 });
 
 $('form#test-form').on('submit', function(event) {
