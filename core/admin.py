@@ -9,7 +9,7 @@ class CustomUserAdmin(UserAdmin):
     ordering = ('email', )
     exclude = ('user_permissions', 'groups')
     search_fields = ('email', 'first_name', 'last_name')
-    list_display = ('is_active', 'email', 'first_name', 'last_name', 'department')
+    list_display = ('email', 'is_active', 'first_name', 'last_name', 'department')
     list_filter = ('is_active', 'department')
     list_editable = ('is_active', )
     fieldsets = ()
