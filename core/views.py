@@ -21,8 +21,8 @@ class RegistrationView(AjaxFormView):
     form_class = UserRegistrationForm
 
     def form_valid(self, form):
-        user = form.save()
-        login(self.request, user)
+        _ = form.save()
+        # login(self.request, user)
         return self.success(form)
 
 

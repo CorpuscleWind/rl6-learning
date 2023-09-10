@@ -24,9 +24,13 @@ function serializeForm(form) {
     return result;
 }
 
-function processResponse(response, form) {
+function processResponse(response, form, successFunc) {
     if(response.status == "OK") {
-        location.reload();
+        if(successFunc==null){
+            location.reload();
+        } else {
+            successFunc();
+        }
     } else {
         $('html, body').animate({ scrollTop: $(form).offset().top }, 'slow');
         var errors = response.message;
@@ -47,7 +51,7 @@ function clearErrors() {
     $('div.form-error').remove();
 }
 
-function ajaxOnFormSubmit(formSelector) {
+function ajaxOnFormSubmit(formSelector, successFunc) {
     clearErrors();
     var url = $(formSelector).attr('action');
 
@@ -55,7 +59,7 @@ function ajaxOnFormSubmit(formSelector) {
         url: url,
         data: serializeForm(formSelector),
         success: function (response) {
-            processResponse(response, formSelector);
+            processResponse(response, formSelector, successFunc);
         }
     })
 }
@@ -67,6 +71,10 @@ $('form#login-form').on('submit', function(event) {
 
 $('form#registration-form').on('submit', function(event) {
     event.preventDefault();
+    var successFunc = function () {
+        $('div#form-registration').hide();
+        $('div#success-registration').show();
+    };
     ajaxOnFormSubmit(this);
 });
 

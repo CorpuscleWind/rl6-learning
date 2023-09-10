@@ -7,7 +7,7 @@
                 <h2>Регистрация</h2>
                 <hr>
             </div>
-            <div class="panel-body">
+            <div class="panel-body" id="form-registration">
                 <form id="registration-form" action="{% url 'core:registration' %}" method="post" role="form">
                     <div class="form-group">
                         <input type="email" name="email" id="email" class="form-control" placeholder="Email" value="">
@@ -48,6 +48,13 @@
                         </div>
                     </div>
                 </form>
+            </div>
+            <div class="panel-body" id="success-registration" hidden>
+                <div classs="row">
+                    Регистрация успешно пройдена!
+                    <br>
+                    Дождитесь подтверждения аккаунта от преподавателя
+                </div>
             </div>
         </div>
     </div>

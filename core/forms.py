@@ -8,7 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 class UserLoginForm(AuthenticationForm):
     error_messages = {
         'invalid_login': u'Неверный email или пароль',
-        'inactive': u'Ваш аккаунт не активен',
+        'inactive': u'Ваш акаунт не подтверджен, дождитесь подтверджения от преподавателя',
     }
 
     def __init__(self, *args, **kwargs):
@@ -30,7 +30,7 @@ class UserRegistrationForm(UserCreationForm):
 
     def save(self, commit=True):
         user = super(UserRegistrationForm, self).save(commit=False)
-        user.is_active = True
+        user.is_active = False
         if commit:
             user.save()
         return user
